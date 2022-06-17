@@ -3,7 +3,7 @@
 
     <ul>
         <li v-for="todo in todos" :key="todo.id">
-            {{ todo.name }}
+            {{ todo.title }}
         </li>
     </ul>
 
@@ -11,33 +11,27 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import TodoService from "@/services/todos.services";
+
 export default {
     name: 'TodosView',
     setup() {
-        const todos = [
-            {
-                id: 1,
-                name: 'tarefa 01',
-                completed: true
-            },
-            {
-                id: 2,
-                name: 'tarefa 02',
-                completed: false
-            },
-            {
-                id: 3,
-                name: 'tarefa 03',
-                completed: true
-            },
-        ];
+        const todos = ref([]);
 
-        const name = ref('default value');
+        onMounted(() => {
+            TodoService.getAll()
+            .then(response => {
+                console.log(response);
+                todos.value = response.data.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        })
 
         return {
-            todos,
-            name
+            todos
         }
     }
 }
