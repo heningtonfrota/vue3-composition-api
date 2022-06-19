@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import TodosView from '@/views/Todos/TodosView.vue';
 import AddTodoView from "@/views/Todos/AddTodoView.vue";
+import EditTodoView from "@/views/Todos/EditTodoView.vue";
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     path: '/todos/create',
     name: 'todos.create',
     component: AddTodoView
+  },
+  {
+    path: '/todos/:id/edit',
+    name: 'todos.edit',
+    component: EditTodoView,
+    props: true
   }
 ]
 
