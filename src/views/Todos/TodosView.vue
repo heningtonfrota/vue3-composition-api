@@ -10,7 +10,7 @@
 
     <ul>
         <li v-for="todo in todos" :key="todo.id">
-            {{ todo.title }}
+            <TodoView :todo="todo" />
         </li>
     </ul>
 
@@ -20,9 +20,13 @@
 <script>
 import { onMounted, ref } from "vue";
 import TodoService from "@/services/todos.services";
+import TodoView from "./TodoView.vue";
 
 export default {
     name: 'TodosView',
+    components: {
+        TodoView
+    },
     setup() {
         const todos = ref([]);
 
