@@ -10,7 +10,7 @@
 
     <ul>
         <li v-for="todo in todos" :key="todo.id">
-            <TodoView :todo="todo" @todoDeleted="removeTodoList" />
+            <TodoView :todo="todo" @todoDeleted="removeTodoList" @todoUpdated="updatedTodo"/>
         </li>
     </ul>
 
@@ -51,10 +51,13 @@ export default {
             todos.value.splice(todos.value.indexOf(todo), 1);
         }
 
+        const updatedTodo = (todo) => todos.value[todos.value.indexOf(todo)] = todo;
+
         return {
             loading,
             todos,
-            removeTodoList
+            removeTodoList,
+            updatedTodo
         }
     }
 }
